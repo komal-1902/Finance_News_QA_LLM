@@ -5,7 +5,7 @@ Created on Sat Nov 23 16:25:21 2024
 
 @author: komal
 """
-
+import os
 import chromadb
 from chromadb.config import Settings
 
@@ -13,12 +13,9 @@ def initialize_chroma_db(db_path, db_name, embedding_function):
     """
     Initialize ChromaDB with persistence support.
     """
+    if not os.path.exists(db_path):
+        os.makedirs(db_path)
     client = chromadb.Client(Settings(persist_directory=db_path))
-    # Ensure the tenant exists
-    try:
-        client.create_tenant(name="default_tenant")  # Create the tenant if it doesn't already exist
-    except Exception:
-        pass
     collection = client.get_or_create_collection(name=db_name, embedding_function=embedding_function)
     return collection, client
 
