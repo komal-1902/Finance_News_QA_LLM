@@ -4,7 +4,7 @@ protobuf==3.20.3
 
 # Other required packages
 google-generativeai>=0.8.3
-pysqlite3-binary>=3.35.0
+pysqlite3>=0.4.6
 chromadb
 streamlit
 langchain
