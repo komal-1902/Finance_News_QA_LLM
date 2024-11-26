@@ -13,9 +13,6 @@ def initialize_chroma_db(db_path, db_name, embedding_function):
     """
     Initialize ChromaDB with persistence support.
     """
-    #if not os.path.exists(db_path):
-    #    os.makedirs(db_path)
-    #client = chromadb.Client(Settings(persist_directory=db_path))
     client = chromadb.Client()
     collection = client.get_or_create_collection(name=db_name, embedding_function=embedding_function)
     return collection, client
