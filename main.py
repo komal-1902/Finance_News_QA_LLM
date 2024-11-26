@@ -14,6 +14,9 @@ from embedding_function import GeminiEmbeddingFunction
 from langchain.document_loaders import UnstructuredURLLoader
 from db_utils import initialize_chroma_db, add_documents_to_db, url_exists_in_db
 
+__import__('pysqlite3')
+import sys
+sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 
 # Configure Generative AI
 load_dotenv()
