@@ -5,7 +5,7 @@ Created on Sat Nov 23 16:25:21 2024
 
 @author: komal
 """
-import os
+
 import chromadb
 from chromadb.config import Settings
 
@@ -13,7 +13,8 @@ def initialize_chroma_db(db_path, db_name, embedding_function):
     """
     Initialize ChromaDB with persistence support.
     """
-    client = chromadb.Client()
+    #client = chromadb.Client(Settings(persist_directory=db_path))
+    client = chromadb.PersistentClient(path=db_path)
     collection = client.get_or_create_collection(name=db_name, embedding_function=embedding_function)
     return collection, client
 
