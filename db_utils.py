@@ -18,6 +18,19 @@ def initialize_chroma_db(db_path, db_name, embedding_function):
     collection = client.get_or_create_collection(name=db_name, embedding_function=embedding_function)
     return collection, client
 
+def list_urls_in_db(collection):
+    """
+    Retrieve and print all URLs currently stored in the database.
+    """
+    try:
+        all_metadatas = collection.get(include=["metadatas"])["metadatas"]
+        urls = [metadata.get("source") for metadata in all_metadatas if metadata and "source" in metadata]
+        
+        return urls
+    except KeyError:
+        print("No URLs found in the database.")
+        return []
+
 def add_documents_to_db(collection, documents, metadatas, overwrite=True):
     """
     Add new documents toxw the database. Optionally overwrite existing content.
@@ -27,6 +40,8 @@ def add_documents_to_db(collection, documents, metadatas, overwrite=True):
     collection.add(documents=documents, metadatas=metadatas, ids=ids)
     print("Added URLS: ")
     print(metadatas)
+    print("\nURLs in database currently:")
+    print(list_urls_in_db(collection))
     return collection.count()
 
 def url_exists_in_db(collection, url):
@@ -37,4 +52,4 @@ def url_exists_in_db(collection, url):
     all_metadatas = collection.get(include=["metadatas"])["metadatas"]
 
     # Check if the URL is already in the metadata
-    return any(metadata.get("source_url") == url for metadata in all_metadatas)
+    return any(metadata.get("source") == url for metadata in all_metadatas)
