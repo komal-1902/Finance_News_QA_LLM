@@ -23,8 +23,10 @@ GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
 genai.configure(api_key=GOOGLE_API_KEY)
 
 # Initialize DB and embedding function
-DB_PATH = "vector_database"
-DB_NAME = "newsarticledb"
+#DB_PATH = "vector_database"
+#DB_NAME = "newsarticledb"
+DB_PATH = os.getenv("DB_PATH")
+DB_NAME = os.getenv("DB_NAME")
 embed_fn = GeminiEmbeddingFunction()
 
 # Initialize or load database
