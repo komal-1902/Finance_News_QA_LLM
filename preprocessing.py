@@ -43,7 +43,7 @@ class GeminiEmbeddingFunction(EmbeddingFunction):
 st.title("News Research Tool")
 
 news_urls = []
-st.sidebar.itle("News Article URLs")
+st.sidebar.title("News Article URLs")
 for i in range(3):
     url = st.sidebar.text_input(f"URL: {i+1}")
     news_urls.append(url)
@@ -58,7 +58,7 @@ if process_url_clicked:
       documents.append(chunk.page_content)
       metadatas.append(chunk.metadata)
       
-    DB_NAME = "newsarticledb"
+    DB_NAME = os.getenv("DB_NAME")
     embed_fn = GeminiEmbeddingFunction()
     embed_fn.document_mode = True
     chroma_client = chromadb.Client()
