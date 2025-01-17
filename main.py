@@ -8,6 +8,10 @@ Created on Sat Nov 23 16:29:16 2024
 __import__("pysqlite3")
 import sys
 sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
+
+import nltk 
+nltk.download('punkt')
+
 import os
 from dotenv import load_dotenv
 import streamlit as st
