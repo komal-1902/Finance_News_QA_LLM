@@ -11,6 +11,7 @@ sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 
 import nltk 
 nltk.download('punkt_tab')
+nltk.download('averaged_perceptron_tagger')
 
 import os
 from dotenv import load_dotenv
