@@ -96,7 +96,7 @@ if query:
     query_oneline = query.replace("\n", " ")
     
     #model = genai.GenerativeModel("gemini-1.5-flash-latest")
-    model = genai.GenerativeModel("gemini-pro")
+    model = genai.GenerativeModel("gemini-1.5-pro")
     prompt = f"""
     QUESTION: {query_oneline}
     PASSAGE: {passage_oneline}
